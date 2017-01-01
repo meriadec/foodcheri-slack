@@ -1,0 +1,3 @@
+Retrieve daily Foodcheri menu then post it to slack
+
+TOKEN=<slack-token> node src/index.js

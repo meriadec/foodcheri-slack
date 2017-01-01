@@ -9,8 +9,10 @@ module.exports = function getMenu () {
     return Promise.resolve(require('../mock.json'))
   }
 
+  console.log('>> creating scraper...')
   const nightmare = Nightmare()
 
+  console.log('>> launching scraper...')
   return nightmare
     .goto(FOODCHERI_URL)
     .evaluate(() => {
@@ -30,9 +32,13 @@ module.exports = function getMenu () {
         if (!imageNode) { return }
         const src = imageNode.getAttribute('src')
 
+        // get desc
+        const descNode = node.querySelector('.shortened-text')
+
         return {
           title: title,
           image: src,
+          desc: $(descNode).text(),
         }
       }
 
